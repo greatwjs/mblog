@@ -1,0 +1,117 @@
+{%extends 'base.html'%}
+{%block title%}
+登录页面
+{%endblock%}
+{%block headingmsg%}
+
+{%endblock%}
+{%block bodymsg%}
+ <form name='login_form' action='/login' method='POST' align='center'>
+   {%csrf_token %}
+   <div align="center">
+     {{login_form.as_p }}
+   </div>
+   <div class='row' >
+  <div class="col-md-1 col-md-offset-5" >
+   <input class="btn btn-primary " type='submit' value='登录'><br/>
+   </div>
+   <div class="col-md-1 col-md-offset-0" >
+   <button type="button" class="btn btn-primary "  data-toggle="modal" data-target="#zhuceModal">
+  注册
+</button>
+   </div>
+   </div>
+ </form>
+{%endblock%}
+{%block footer%}
+ <li><a href="#">我的主页</a></li>
+  <li><a href="#">后台管理</a></li>
+  <li class="active">个人信息</li>
+{%endblock%}
+
+{%block html%}
+
+
+<form  name="zhuce_form" action="zhuce_submit" method="post" accept-charset="utf-8">
+{%csrf_token %}
+<div class="modal fade" id="zhuceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">    <!--模态框 -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">注册</h4>
+        <p>返回：{{msg}}</p>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">   <!--手机注册代码-->
+          <label for="mobile" class="col-lg-2 col-sm-2 control-label">手机号码:</label>
+          <div class="col-lg-10">
+            <div class="input-group m-bot15">
+          <input type="text" class="form-control" id="mobile" name="mobile" placeholder="手机号码">
+          <span class="input-group-btn">
+             <input type="button" id="forcode" onclick="settime(this)" value="免费获取验证码" class="btn btn-success">
+          </span>
+            </div>
+          <p class="help-block">请填写手机号</p>
+          </div>
+          <label for="code" class="col-lg-2 col-sm-2 control-label">验证码:</label>
+          <div class="col-lg-10">
+            <div class="input-group m-bot15">
+          <input type="text" class="form-control" id="code" name="code" placeholder="验证码">
+            </div>
+          <p class="help-block">请输入验证码</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary"  >确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+<!--发送按钮倒计时代码-->
+<script type="text/javascript">
+var countdown=60;
+function settime(obj) {
+  if (countdown == 0) {
+    obj.removeAttribute("disabled");
+    obj.value="免费获取验证码";
+    countdown = 60;
+    return;
+  } else {
+    obj.setAttribute("disabled", true);
+    obj.value="重新发送(" + countdown + ")";
+    countdown--;
+  }
+setTimeout(function() {
+  settime(obj) }
+  ,1000)
+}
+</script>
+
+<!--向后台通过ajax发送手机号码数据-->
+<script>
+  $('#forcode').click(function () {
+    $.ajax({
+      cache:false,
+      type:"POST",
+      dataType: "json",
+      url:"sendsms",
+      data:{
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        mobile:$("#mobile").val()
+      },
+      async:true,
+      success:function (data) {
+        alert(data)
+      }
+    })
+  })
+</script>
+
+
+{%endblock%}

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>{%block title%}用户登陆{%endblock%}</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> <script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/mycookies.js"></script>
+    <style>
+     .wrap{margin:0 auto;width:300px;}
+</style>
+<style>
+.footer{ left:0px; position:fixed; width:100%; height:40px;
+background-color:black; color:white; text-align:center; font-size:18px; font-weight:bold; bottom:10px;}
+</style>
+<style type="text/css">
+body{background-image:url('');
+background-repeat:repeat;background-position:center}
+</style>
+
+  </head>
+  <body >
+  <nav class="navbar navbar-inverse">
+<ul class="nav nav-pills">
+  {%if username%}
+   <li role="presentation" class="active"><a href="#">{{username}}</a></li>
+   {%else%}
+   <li role="presentation" class="active"><a href="#">用户登录</a></li>
+   {%endif%}
+    <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+   个人信息管理
+       <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#">用户信息查询</a></li>
+      <li><a href="#">用户信息编辑</a></li>
+      <li role="separator" class="divider"></li>
+    <li><a href="#">返回主页</a></li>
+
+    </ul>
+  </li>
+
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+   成绩统计
+       <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#">个人成绩查询</a></li>
+      <li role="separator" class="divider"></li>
+    <li><a href="#">返回主页</a></li>
+    </ul>
+  </li>
+
+  <li><a href="">注销</a></li>
+</ul>
+</nav>
+    <h1><em><strong>欢迎来到明日博客，请登陆！</strong></em></h1>
+    <h2></h2>
+    <span class="glyphicon glyphicon-home"></span>
+    <span class="glyphicon glyphicon-signal"></span>
+    <span class="glyphicon glyphicon-cog"></span>
+    <span class="glyphicon glyphicon-apple"></span>
+    <span class="glyphicon glyphicon-trash"></span>
+    <span class="glyphicon glyphicon-play-circle"></span>
+    <span class="glyphicon glyphicon-headphones"></span>
+
+<h3></br></br></h3>
+<div class="col-md-10 col-md-offset-1" >
+   <div class='cintainer' >
+     <div class='panel panel-primary'>
+         <div class='panel-heading'>
+           {%block headingmsg%}
+
+           {%endblock%}
+         </div>
+         <div class='panel-body'>
+             {%block bodymsg%} {%endblock%}
+         </div>
+         <div class='panel-footer'>
+             {%block footermsg%} {%endblock%}
+         </div>
+      </div>
+</div>
+</div>
+
+<div class="footer">
+<ol class="breadcrumb">
+{%block footer%}
+{%endblock%}
+</ol>
+</div>
+{%block html%}
+{%endblock%}
+  </body>
+
+</html>
